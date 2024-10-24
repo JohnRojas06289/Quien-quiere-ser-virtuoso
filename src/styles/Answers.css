@@ -1,0 +1,208 @@
+::-moz-focus-inner {
+  border: 0;
+}
+
+/* Colores */
+:root {
+  /* Colores que se utilizarán */
+  --color-base: #071f5f;
+  --color-secundario: #4a77b3; /* lighten($color-base, 20) */
+  --color-terciario: #efb40c;
+  --color-terciarioB: #d6a30c; /* darken($color-terciario, 10) */
+
+  /* Posición superior de los botones, menos el primero */
+  --margin-top: 10px;
+
+  /* Grosor de la línea que pasa a través de los botones */
+  --grosor: 7px;
+
+  /* Altura de los botones */
+  --height: 35px;
+  --width: 800px;
+
+  /* Relleno de los botones en porcentaje */
+  --relleno: 10%;
+
+  /* Separación del color de relleno del botón */
+  --separacion: 3px;
+
+  /* Formas */
+  --formas: polygon(
+      0% 50%,
+      var(--relleno) 0%,
+      calc(100% - var(--relleno)) 0%,
+      100% 50%,
+      calc(100% - var(--relleno)) 100%,
+      var(--relleno) 100%
+  );
+
+  /* Imágenes de fondo de los botones */
+  --fondoA: linear-gradient(
+      90deg,
+      rgba(74, 119, 179, 0.6) 20%,
+      rgba(7, 31, 95, 0.9) 80%
+  );
+  --fondoB: linear-gradient(
+      90deg,
+      rgba(7, 31, 95, 0.9) 20%,
+      rgba(74, 119, 179, 0.6) 80%
+  );
+}
+
+/* Contenedor principal de los botones */
+.millonario {
+  margin: 0 auto;
+  max-width: var(--width);
+}
+
+.millonario__item {
+  position: relative;
+  min-height: var(--grosor);
+  transition: 300ms ease;
+}
+
+.millonario__item:not(:first-of-type) {
+  margin-top: 10px;
+}
+
+.millonario__item::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--color-base);
+  background-image: linear-gradient(
+      0deg,
+      var(--color-base),
+      white,
+      var(--color-secundario)
+  );
+  height: var(--grosor);
+}
+
+/* Opciones */
+.opciones {
+  display: flex;
+}
+
+@media screen and (max-width: 449px) {
+  .opciones {
+      display: block;
+  }
+}
+
+.opciones__item {
+  --padding: 50px;
+  --divisor: 4;
+  transition: 300ms ease;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 50%;
+  position: relative;
+  min-height: var(--height);
+}
+
+@media screen and (min-width: 450px) {
+  .opciones__item:first-of-type {
+      padding-left: var(--padding);
+      padding-right: calc(var(--padding) / var(--divisor));
+  }
+}
+
+@media screen and (min-width: 449px) {
+  .opciones__item:last-of-type {
+      padding-right: var(--padding);
+      padding-left: calc(var(--padding) / var(--divisor));
+  }
+}
+
+.opciones__item:not(:first-of-type) {
+  margin-top: 10px;
+}
+
+.opciones__item::before {
+  content: "";
+  display: block;
+  position: absolute;
+  margin: auto;
+  background-color: #b3d1f7; /* lighten($color-base, 70) */
+}
+
+.opciones__item:hover .button::before {
+  background-color: var(--color-terciarioB);
+}
+
+.button {
+  display: block;
+  position: relative;
+  padding-left: calc(var(--relleno) + 4px);
+  padding-right: calc(var(--relleno) + 4px);
+  padding-top: var(--separacion);
+  padding-bottom: var(--separacion);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: var(--height);
+  width: 100%;
+  transition: 300ms ease;
+  clip-path: var(--formas);
+  border: 0;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  background-image: radial-gradient(
+      white,
+      var(--color-secundario) 30%,
+      white 50%,
+      var(--color-secundario)
+  );
+  background-size: 120% 100%;
+  background-position: center center;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button::before {
+  transition: 300ms ease;
+  content: "";
+  display: block;
+  position: absolute;
+  margin: auto;
+  left: calc(var(--separacion) * 2);
+  right: calc(var(--separacion) * 2);
+  top: var(--separacion);
+  bottom: var(--separacion);
+  clip-path: var(--formas);
+  background-color: var(--color-secundario);
+  z-index: -1;
+}
+
+/* Imagen de fondo para los botones */
+.fondoA::before {
+  transition: 300ms ease;
+}
+
+@media screen and (max-width: 449px) {
+  .fondoA::before {
+      background-image: var(--fondoB);
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .fondoA::before {
+      background-image: var(--fondoA);
+  }
+}
+
+.fondoB::before {
+  background-image: var(--fondoB);
+}
+
+/* Colores */
+.amarillo {
+  color: var(--color-terciario);
+}
